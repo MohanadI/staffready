@@ -1,7 +1,7 @@
 import axios from "axios";
 import { APIS } from "./APIConstants";
 
-const MAIN_URL = "https://cobalt301.openstack.local/StaffReady/v10/api/"
+const MAIN_URL = "/StaffReady/v10/api/"
 export const get_document_tree = async (type) => {
     let res = null;
     let api = "";

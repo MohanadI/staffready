@@ -1,8 +1,6 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: "Open Sans", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -10,4 +8,41 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+.ant-row{
+  padding: 10px;
+  margin: 0 !important;
+}
+
+.status-icon{
+  vertical-align: sub;
+  font-size: 25px;
+}
+
+.status-icon.success{
+  color: #8cc53e
+}
+.status-icon.warning{
+  color: #f5c75e
+}
+.status-icon.info{
+  color: #3498db
+}
+.ant-collapse-header .ant-typography{
+  color: #58595F;
+  font-size: 16px;
+  font-weight: 500
+}
+.ant-collapse{
+  background: #ffffff;
+  border:0;
+}
+.ant-collapse .ant-collapse-item{
+  background-color: #e9e9e9;
+  margin-top: 10px;
+  border: 1px solid #d9d9d9;
+}
+.ant-collapse .ant-collapse-item:first-child{
+  margin-top: 0
 }

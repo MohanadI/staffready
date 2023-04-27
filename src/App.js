@@ -1,6 +1,7 @@
 import { ConfigProvider } from 'antd';
 import { theme } from './theme';
-import DocumentControl from './modules/DocumentControl/documentControl';
+import 'react-perfect-scrollbar/dist/css/styles.css';
+import DocumentControl from './modules/DocumentControl/DocumentControl';
 
 function App() {
   return (

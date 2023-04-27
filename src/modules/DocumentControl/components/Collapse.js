@@ -13,7 +13,7 @@ const text = `
 `;
 
 
-function CollapseComponent(){
+function CollapseComponent() {
 
     const expandIconPosition = 'end';
 
@@ -21,34 +21,37 @@ function CollapseComponent(){
         console.log(key);
     };
 
+
     return (
-        <Collapse
-            defaultActiveKey={['1']}
-            onChange={onChange}
-            expandIcon={({ isActive }) => isActive ? <MinusOutlined /> : <PlusOutlined />}
-            expandIconPosition={expandIconPosition}
-        >
-            <Panel header={
-                <Space>
-                    <CheckIcon />
-                    <Typography.Text>
-                        Subject
-                    </Typography.Text>
-                </Space>
-            } key="1">
-                <div>{text}</div>
-            </Panel>
-            <Panel header={
-                <Space>
-                    <CheckIcon />
-                    <Typography.Text>
-                        Subject Document
-                    </Typography.Text>
-                </Space>
-            } key="2">
-                <div>{text}</div>
-            </Panel>
-        </Collapse>
+        <>
+            <Collapse
+                defaultActiveKey={['1']}
+                onChange={onChange}
+                expandIcon={({ isActive }) => isActive ? <MinusOutlined /> : <PlusOutlined />}
+                expandIconPosition={expandIconPosition}
+            >
+                <Panel header={
+                    <Space>
+                        <CheckIcon />
+                        <Typography.Text>
+                            Subject
+                        </Typography.Text>
+                    </Space>
+                } key="1">
+                    <div>{text}</div>
+                </Panel>
+                <Panel header={
+                    <Space>
+                        <CheckIcon />
+                        <Typography.Text>
+                            Subject Document
+                        </Typography.Text>
+                    </Space>
+                } key="2">
+                    <div>{text}</div>
+                </Panel>
+            </Collapse>
+        </>
     )
 }
 

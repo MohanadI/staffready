@@ -6,43 +6,57 @@ body {
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
 
-.ant-row{
+.ant-row {
   padding: 10px;
   margin: 0 !important;
 }
 
-.status-icon{
+.status-icon {
   vertical-align: sub;
   font-size: 25px;
 }
 
-.status-icon.success{
-  color: #8cc53e
+.status-icon.success {
+  color: #8cc53e;
 }
-.status-icon.warning{
-  color: #f5c75e
+.status-icon.warning {
+  color: #f5c75e;
 }
-.status-icon.info{
-  color: #3498db
+.status-icon.info {
+  color: #3498db;
 }
-.ant-collapse-header .ant-typography{
-  color: #58595F;
+.ant-collapse-header .ant-typography {
+  color: #58595f;
   font-size: 16px;
-  font-weight: 500
+  font-weight: 500;
 }
-.ant-collapse{
+.ant-collapse {
   background: #ffffff;
-  border:0;
+  border: 0;
 }
-.ant-collapse .ant-collapse-item{
+.ant-collapse .ant-collapse-item {
   background-color: #e9e9e9;
   margin-top: 10px;
   border: 1px solid #d9d9d9;
 }
-.ant-collapse .ant-collapse-item:first-child{
-  margin-top: 0
+.ant-collapse .ant-collapse-item:first-child {
+  margin-top: 0;
+}
+.ant-tree .ant-tree-node-content-wrapper {
+  text-overflow: ellipsis;
+  max-width: 140px;
+  overflow: hidden;
+}
+.m-t-10{
+  margin-top: 10px;
+}
+.m-b-10{
+  margin-bottom: 10px;
+}
+.m-0{
+  margin: 0;
 }

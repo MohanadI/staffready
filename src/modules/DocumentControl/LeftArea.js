@@ -1,108 +1,67 @@
+import { useContext, useEffect, useState } from "react";
 import { Button, Space, Input, Tree, Skeleton, message } from "antd";
-import {
-    TagsOutlined,
-    SendOutlined,
-    FolderFilled,
-    FileSearchOutlined
-} from '@ant-design/icons';
-import { useState } from "react";
 import { get_document_tree } from "./apis/DocumentControlCalls";
-
-const treeData = [
-    {
-        title: 'Core Lab',
-        key: '0-0',
-        icon: <FolderFilled />,
-    },
-    {
-        title: 'GH-Clinics',
-        key: '0-1',
-        icon: <FolderFilled />,
-    },
-    {
-        title: 'JM-Test',
-        key: '0-2',
-        icon: <FolderFilled />,
-        children: [
-            {
-                title: 'N-Folder',
-                key: '0-2-0',
-                icon: <FolderFilled />,
-                children: [
-                    {
-                        title: 'Testing Document',
-                        key: '0-2-0-1',
-                        icon: <FileSearchOutlined />,
-                    }
-                ],
-            },
-            {
-                title: 'parent 1-1',
-                key: '0-2-1',
-                icon: <FolderFilled />,
-                children: [
-                    {
-                        title: 'leaf',
-                        key: '0-2-1-0',
-                        icon: <FileSearchOutlined />,
-                    },
-                ],
-            }
-        ],
-    }
-];
+import useWindowSize from "../../hooks/useWindowSize";
+import PerfectScrollbar from 'react-perfect-scrollbar'
+import { DefaultTabs, DocumentControlContext } from "./configs";
 
 function LeftArea() {
-    const [isLoading, setIsLoading] = useState(false);
-    const [messageApi, contextHolder] = message.useMessage();
+    const { handleDCDataChange, handleLoadingChange } = useContext(DocumentControlContext);
 
-    const [documentControlTabs, setDocumentControlTabs] = useState([
-        {
-            key: 'subject',
-            title: 'Subject',
-            icon: <FolderFilled />,
-            active: true
-        },
-        {
-            key: 'classification',
-            title: 'Classification',
-            icon: <TagsOutlined />,
-            active: false
-        },
-        {
-            key: 'location',
-            title: 'Location',
-            icon: <SendOutlined />,
-            active: false
-        }
-    ]);
+    const [isLoading, setIsLoading] = useState(false);
+    const [treeData, setTreeData] = useState([]);
+    const [documentControlTabs, setDocumentControlTabs] = useState(DefaultTabs);
+
+    const [messageApi, contextHolder] = message.useMessage();
+    const { height } = useWindowSize();
+
+    useEffect(() => {
+        UpdateActiveTab("subject");
+    }, []);
+
+    const onSelect = (selectedKeys, info) => {
+        handleDCDataChange(info?.node);
+    };
 
     const UpdateActiveTab = async (tabKey) => {
         setIsLoading(true);
+        handleLoadingChange(true);
         const updated = documentControlTabs.map(e => ({ ...e, active: false }));
         var currentIndex = updated.findIndex((item) => {
             return item.key === tabKey;
         });
         updated[currentIndex].active = true;
+        const activeTab = documentControlTabs.filter(v => v.active === true)[0].key;
+
         setDocumentControlTabs(updated);
 
-        const treeData = await get_document_tree();
-        if(treeData === null){
+        const results = await get_document_tree(tabKey);
+        if (results === null) {
             messageApi.open({
                 type: 'error',
                 content: 'Something went wrong!',
             });
         }
+        const TreeResult = results.data;
+        if ((treeData.length === 0 && TreeResult.length > 0) || activeTab !== tabKey){
+            handleDCDataChange(TreeResult[0]);
+        }
+
+
+        setTreeData(TreeResult);
         setIsLoading(false);
+        handleLoadingChange(false);
     }
 
+    const activeIcon = documentControlTabs.filter(v => v.active === true)[0].icon;
+    const defaultSelectedKey = treeData.length > 0 ? treeData[0].value : "";
     return (
         <>
             {contextHolder}
-            <Space direction="vertical">
+            <Space direction="vertical" style={{maxWidth: "100%"}}>
                 <Space.Compact>
                     {documentControlTabs.map(tab =>
-                        <Button icon={tab.icon}
+                        <Button key={tab.key} icon={tab.icon}
                             loading={tab.active && isLoading}
                             type={tab.active ? "primary" : "default"}
                             style={tab.active ? {
@@ -123,12 +82,17 @@ function LeftArea() {
                     <Button>Add</Button>
                 </Space>
                 <Skeleton loading={isLoading}>
-                    <Tree
-                        showLine={true}
-                        showIcon={true}
-                        // onSelect={onSelect}
-                        treeData={treeData}
-                    />
+                    <PerfectScrollbar style={{ maxHeight: height - 150, overflow: "auto" }}>
+                        <Tree
+                            fieldNames={{ title: "text", key: "value", children: "children" }}
+                            showLine={true}
+                            showIcon={true}
+                            icon={activeIcon}
+                            defaultSelectedKeys={[defaultSelectedKey]}
+                            onSelect={onSelect}
+                            treeData={treeData}
+                        />
+                    </PerfectScrollbar>
                 </Skeleton>
             </Space>
         </>

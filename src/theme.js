@@ -6,7 +6,12 @@ export const theme = {
     components: {
         Collapse:{
             colorFillAlter: "#e9e9e9",
-            padding: 8
+            padding: 8,
+            paddingSM: 8
+        },
+        Table:{
+            padding: 8,
+            paddingContentVerticalLG: 8
         }
     }
 };

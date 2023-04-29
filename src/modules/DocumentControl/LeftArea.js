@@ -42,7 +42,7 @@ function LeftArea() {
                 content: 'Something went wrong!',
             });
         }
-        const TreeResult = results.data;
+        const TreeResult = results?.data;
         if ((treeData.length === 0 && TreeResult.length > 0) || activeTab !== tabKey){
             handleDCDataChange(TreeResult[0]);
         }

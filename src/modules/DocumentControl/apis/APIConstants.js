@@ -6,7 +6,11 @@ export const APIS = {
     },
     COLOR_BAR:{
         SUBJECTS: {
-            GET_SUBJECT: (ID) => "documentcontrol/colorbar/subject/" + ID
+            GET_SUBJECT: (ID) => "subject/" + ID
+        },
+        STATUS: {
+            SUBJECT: (ID) => "documentcontrol/colorbar/subject/" + ID,
+            SUBJECT_DOCUMENT: (ID) => "documentcontrol/colorbar/subjectDocuments/" + ID
         }
     }
 

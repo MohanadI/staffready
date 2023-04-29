@@ -1,15 +1,14 @@
 import { useContext } from "react";
 import { Divider, Skeleton, Typography } from 'antd';
 import { FileSearchOutlined } from '@ant-design/icons';
-import CollapseComponent from './components/Collapse';
 import { DocumentControlContext } from "./configs";
-import SubjectTemplate from "./components/SubjectTemplate";
-import DocumentsTemplate from "./components/DocumentsTemplate";
-import RevisionTemplate from "./components/RevisionTemplate";
-import ClassificationFolderTemplate from "./components/ClassificationFolderTemplate";
-import ClassificationTemplate from "./components/ClassificationTemplate";
-import SiteTemplate from "./components/SiteTemplate";
-import LocationTemplate from "./components/LocationTemplate";
+import SubjectTemplate from "./components/CollapseTemplates/Subject/SubjectTemplate";
+import DocumentsTemplate from "./components/CollapseTemplates/DocumentsTemplate";
+import RevisionTemplate from "./components/CollapseTemplates/RevisionTemplate";
+import ClassificationFolderTemplate from "./components/CollapseTemplates/ClassificationFolderTemplate";
+import ClassificationTemplate from "./components/CollapseTemplates/ClassificationTemplate";
+import SiteTemplate from "./components/CollapseTemplates/SiteTemplate";
+import LocationTemplate from "./components/CollapseTemplates/LocationTemplate";
 
 const { Title } = Typography;
 

@@ -1,8 +1,8 @@
 import { Collapse, Space, Typography } from 'antd';
 import { PlusOutlined, MinusOutlined } from '@ant-design/icons';
-// import { WarningIcon } from '../../../components/Icons/WarningIcon';
-import { CheckIcon } from '../../../components/Icons/CheckIcon';
-// import { InfoIcon } from '../../../components/Icons/InfoIcon';
+import PanelStatusIcon from '../../../components/UI/PanelStatusIcon';
+import { useContext } from 'react';
+import { DocumentControlContext } from '../configs';
 
 
 const { Panel } = Collapse;
@@ -13,43 +13,40 @@ const text = `
 `;
 
 
-function CollapseComponent() {
+function CollapseComponent({ panels }) {
+    const { handleActiveTabsChange } = useContext(DocumentControlContext);
 
     const expandIconPosition = 'end';
 
     const onChange = (key) => {
-        console.log(key);
+        handleActiveTabsChange(key);
     };
 
 
     return (
         <>
             <Collapse
-                defaultActiveKey={['1']}
                 onChange={onChange}
                 expandIcon={({ isActive }) => isActive ? <MinusOutlined /> : <PlusOutlined />}
                 expandIconPosition={expandIconPosition}
             >
-                <Panel header={
-                    <Space>
-                        <CheckIcon />
-                        <Typography.Text>
-                            Subject
-                        </Typography.Text>
-                    </Space>
-                } key="1">
-                    <div>{text}</div>
-                </Panel>
-                <Panel header={
-                    <Space>
-                        <CheckIcon />
-                        <Typography.Text>
-                            Subject Document
-                        </Typography.Text>
-                    </Space>
-                } key="2">
-                    <div>{text}</div>
-                </Panel>
+                {panels?.map((panel) =>
+                (
+                    <Panel
+                        key={panel.key}
+                        forceRender={true}
+                        header={
+                            <Space>
+                                <PanelStatusIcon url={panel.iconApi} />
+                                <Typography.Text>
+                                    {panel.title}
+                                </Typography.Text>
+                            </Space>
+                        }>
+                        {panel.body}
+                    </Panel>
+                )
+                )}
             </Collapse>
         </>
     )

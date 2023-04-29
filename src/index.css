@@ -16,7 +16,7 @@ code {
 }
 
 .status-icon {
-  vertical-align: sub;
+  vertical-align: middle;
   font-size: 25px;
 }
 
@@ -51,12 +51,25 @@ code {
   max-width: 140px;
   overflow: hidden;
 }
-.m-t-10{
+.m-t-10 {
   margin-top: 10px;
 }
-.m-b-10{
+.m-b-10 {
   margin-bottom: 10px;
 }
-.m-0{
+.m-b-5{
+  margin-bottom: 5px;
+}
+.m-0 {
   margin: 0;
+}
+.helpers-area {
+  text-align: center;
+}
+.helpers-area .ant-btn {
+  color: #1c90dc;
+}
+.helpers-area .ant-btn span {
+  margin-left: 2px;
+  text-decoration-line: underline;
 }

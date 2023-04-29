@@ -7,6 +7,7 @@ import { DocumentControlContext } from './configs';
 function DocumentControl() {
   const [documentControlData, setDocumentControlData] = useState(null);
   const [isLoading, setIsLoading] = useState(null);
+  const [activeTabs, setActiveTabs] = useState([]);
 
   const handleDCDataChange = (data) => {
     setDocumentControlData(data);
@@ -16,9 +17,21 @@ function DocumentControl() {
     setIsLoading(flag);
   }
 
+  const handleActiveTabsChange = (tabs) => {
+    setActiveTabs(tabs);
+  }
 
   return (
-    <DocumentControlContext.Provider value={{ documentControlData, handleDCDataChange, isLoading, handleLoadingChange }}>
+    <DocumentControlContext.Provider value={
+      {
+        documentControlData,
+        handleDCDataChange,
+        isLoading,
+        handleLoadingChange,
+        activeTabs,
+        handleActiveTabsChange
+      }}
+    >
       <Row gutter={[16, 16]}>
         <Col span={6} xs={24} sm={24} md={10} lg={6} xl={6}>
           <LeftArea />

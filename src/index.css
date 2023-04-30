@@ -11,7 +11,7 @@ code {
 }
 
 .ant-row {
-  padding: 10px;
+  padding: 5px;
   margin: 0 !important;
 }
 
@@ -67,9 +67,14 @@ code {
   text-align: center;
 }
 .helpers-area .ant-btn {
-  color: #1c90dc;
+  color: #ea6241;
+  font-size: 15px;
+    width: 30px !important;
+    height: 30px;
 }
-.helpers-area .ant-btn span {
-  margin-left: 2px;
-  text-decoration-line: underline;
+.table-striped-rows tr:nth-child(2n) td {
+    background-color: #fbfbfbc7;
+}
+.table-striped-rows thead {
+    background-color: #f1f1f1;
 }

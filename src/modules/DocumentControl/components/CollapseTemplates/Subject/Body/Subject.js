@@ -5,6 +5,7 @@ import { MessageOutlined, QuestionCircleOutlined, CheckCircleOutlined, CloudDown
 import { DocumentControlContext } from '../../../../configs';
 import { get_subject_data } from '../../../../apis/DocumentControlCalls';
 import { EditableCell } from '../../../../../../hooks/editCell';
+import Feedback from '../../../../../../components/UI/Modals/Feedback';
 
 const helpContent = (
     <div>
@@ -16,6 +17,7 @@ export default function SubjectBody() {
     const [form] = Form.useForm();
     const [isLoading, setIsLoading] = useState(false);
     const [loadedBefore, setLoadedBefore] = useState(false);
+    const [openFeedback, setOpenFeedback] = useState(false);
     const [dataSource, setDataSource] = useState([
         {
             key: '0',
@@ -163,15 +165,23 @@ export default function SubjectBody() {
 
     return (
         <>
+            {openFeedback &&
+                <Feedback openModal={openFeedback} handleCloseModal={() => setOpenFeedback(false)} />
+            }
             <Row className='helpers-area'>
                 <Col span={12} offset={6}>
                     <Space>
-                        <Button size="small" type="text" icon={<MessageOutlined />}>Feedback</Button>
+                        <Button
+                            size="small"
+                            icon={<MessageOutlined />}
+                            onClick={() => setOpenFeedback(true)}
+                        >
+                        </Button>
                         <Popover content={helpContent} title="Subject" trigger="click">
-                            <Button size="small" type="text" icon={<QuestionCircleOutlined />}>Help</Button>
+                            <Button size="small" icon={<QuestionCircleOutlined />}></Button>
                         </Popover>
 
-                        <Button size="small" type="text" icon={<CheckCircleOutlined />}>Audit</Button>
+                        <Button size="small" icon={<CheckCircleOutlined />}></Button>
                     </Space>
                 </Col>
             </Row>

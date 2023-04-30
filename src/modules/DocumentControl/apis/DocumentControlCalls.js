@@ -31,6 +31,17 @@ export const get_subject_data = async (ID) => {
     return res?.data;
 }
 
+export const get_subject_document_data = async (ID) => {
+    let res = null;
+
+    await axios
+        .get(MAIN_URL + APIS.COLOR_BAR.SUBJECTS.GET_SUBJECT_DOCUMENT(ID))
+        .then(data => res = data)
+        .catch(error => console.log(error));
+
+    return res?.data;
+}
+
 export const get_color_bar_status = async (url) => {
     let res = null;
 

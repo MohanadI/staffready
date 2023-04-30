@@ -11,7 +11,18 @@ export const theme = {
         },
         Table:{
             padding: 8,
-            paddingContentVerticalLG: 8
+            paddingContentVerticalLG: 6,
+            controlItemBgHover: "#333333"
+        },
+        Pagination: {
+            controlHeight: 20
+        },
+        Form: {
+            marginLG: 0
+        },
+        Modal:{
+            paddingContentHorizontalLG: 15,
+            paddingLG: 15
         }
     }
 };

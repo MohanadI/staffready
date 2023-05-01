@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 
-import { Form, Button, Space, Row, Col, Popover, Skeleton, Popconfirm, Table, Typography } from 'antd';
+import { Form, Button, Space, Row, Col, Popover, Skeleton, Popconfirm, Table, Typography, Tooltip } from 'antd';
 import { MessageOutlined, QuestionCircleOutlined, CheckCircleOutlined, CloudDownloadOutlined } from '@ant-design/icons';
 import { DocumentControlContext } from '../../../../configs';
 import { get_subject_data } from '../../../../apis/DocumentControlCalls';
@@ -171,17 +171,21 @@ export default function SubjectBody() {
             <Row className='helpers-area'>
                 <Col span={12} offset={6}>
                     <Space>
-                        <Button
-                            size="small"
-                            icon={<MessageOutlined />}
-                            onClick={() => setOpenFeedback(true)}
-                        >
-                        </Button>
+                        <Tooltip placement="top" title="Feedback">
+                            <Button
+                                size="small"
+                                icon={<MessageOutlined />}
+                                onClick={() => setOpenFeedback(true)}
+                            />
+                        </Tooltip>
                         <Popover content={helpContent} title="Subject" trigger="click">
-                            <Button size="small" icon={<QuestionCircleOutlined />}></Button>
+                            <Tooltip placement="top" title="Help">
+                                <Button size="small" icon={<QuestionCircleOutlined />} />
+                            </Tooltip>
                         </Popover>
-
-                        <Button size="small" icon={<CheckCircleOutlined />}></Button>
+                        <Tooltip placement="top" title="Audit">
+                            <Button size="small" icon={<CheckCircleOutlined />} />
+                        </Tooltip>
                     </Space>
                 </Col>
             </Row>

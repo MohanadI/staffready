@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react';
 
-import { Button, Space, Row, Col, Popover, Skeleton, Table } from 'antd';
+import { Button, Space, Row, Col, Popover, Skeleton, Table, Tooltip } from 'antd';
 import { MessageOutlined, QuestionCircleOutlined, EditOutlined } from '@ant-design/icons';
 import { DocumentControlContext } from '../../../../configs';
 import { get_subject_document_data } from '../../../../apis/DocumentControlCalls';
@@ -74,14 +74,18 @@ export default function SubjectDocumentBody() {
     return (
         <>
             {openBulkEdit &&
-                <EditSubjectDocument openModal={openBulkEdit} handleCloseModal={() => setOpenBulkEdit(false)}/>
+                <EditSubjectDocument openModal={openBulkEdit} handleCloseModal={() => setOpenBulkEdit(false)} />
             }
             <Row className='helpers-area'>
                 <Col span={12} offset={6}>
                     <Space>
-                        <Button size="small" icon={<MessageOutlined />}></Button>
+                        <Tooltip placement="top" title="Feedback">
+                            <Button size="small" icon={<MessageOutlined />} />
+                        </Tooltip>
                         <Popover content={helpContent} title="Subject Documents" trigger="click">
-                            <Button size="small" icon={<QuestionCircleOutlined />}></Button>
+                            <Tooltip placement="top" title="Help">
+                                <Button size="small" icon={<QuestionCircleOutlined />} />
+                            </Tooltip>
                         </Popover>
                     </Space>
                 </Col>

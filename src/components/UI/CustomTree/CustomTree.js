@@ -1,14 +1,9 @@
 import "./_customTree.scss"
 import { useState, useEffect, useRef } from 'react';
 import { Tree, Skeleton, Space, Input, Button } from "antd";
-import cloneDeep from 'lodash/cloneDeep'
 import PerfectScrollbar from 'react-perfect-scrollbar'
 import useWindowSize from "../../../hooks/useWindowSize";
-
-
-
-
-
+import { cloneDeep } from "lodash";
 
 const CustomTree = ({ activeIcon, defaultSelectedKey, onSelect, treeData, isLoading }) => {
 
@@ -17,21 +12,12 @@ const CustomTree = ({ activeIcon, defaultSelectedKey, onSelect, treeData, isLoad
     const [searchTreeData, setSearchedTreeData] = useState([]);
     const [searchText, setSearchText] = useState('');
     const { height } = useWindowSize();
-    const isFristRender = useRef(true)
-
 
     useEffect(() => {
         setSearchedTreeData(treeData)
-    }, [treeData])
-
+    }, [treeData]);
 
     useEffect(() => {
-        if (isFristRender.current) {
-            isFristRender.current = false;
-            return;
-        }
-
-
         const _expandedKeys = [];
         const traverse = (data) => {
             return data.map(node => {
@@ -53,48 +39,35 @@ const CustomTree = ({ activeIcon, defaultSelectedKey, onSelect, treeData, isLoad
                     )
                 } else {
                     newNode.text = <span>{node?.text}</span>
-
                 }
-
                 if (node?.children) {
                     return { ...newNode, children: traverse(node.children) }
                 }
                 return newNode
-            })
+            });
         }
 
         const traversedTree = traverse(treeData);
         setExpandedKeys(_expandedKeys);
         setSearchedTreeData(traversedTree);
         setAutoExpandParent(true);
-
-
-
-    }, [searchText])
-
+    }, [searchText]);
 
     const onSearch = (e) => {
         let { value: searchText } = e.target;
         searchText = searchText == "" ? null : searchText;
-
         setSearchText(searchText);
-
-
-
-
     }
 
     const onExpand = (newExpandKeys) => {
         setAutoExpandParent(false);
         setExpandedKeys(newExpandKeys)
-
     }
+
     return (
         <>
             <Space style={{ marginBottom: '10px' }} >
-                <Space.Compact>
-                    <Input placeholder="Find Subject" value={searchText} onChange={onSearch} />
-                </Space.Compact>
+                <Input placeholder="Find Subject" value={searchText} onChange={onSearch} />
                 <Button onClick={() => {
                     setSearchText(null)
                 }}>Reset</Button>

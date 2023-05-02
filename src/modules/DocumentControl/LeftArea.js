@@ -24,6 +24,7 @@ function LeftArea() {
     };
 
     const UpdateActiveTab = async (tabKey) => {
+        setTreeData([]);
         setIsLoading(true);
         handleLoadingChange(true);
         const updated = documentControlTabs.map(e => ({ ...e, active: false }));
@@ -71,7 +72,7 @@ function LeftArea() {
                                 type={tab.active ? "primary" : "default"}
                                 style={tab.active ? {
                                     width: 170
-                                } : { backgroundColor: 'lightGray', flex: 1 }
+                                } : { backgroundColor: '#dedede', flex: 1 }
                                 }
                                 onClick={() => UpdateActiveTab(tab.key)}
                             >

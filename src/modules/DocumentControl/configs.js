@@ -1,8 +1,8 @@
 import { createContext } from 'react';
 import {
-    TagsOutlined,
-    SendOutlined,
-    FolderFilled
+    FolderFilled,
+    TagsFilled,
+    SettingFilled
 } from '@ant-design/icons';
 
 export const DocumentControlContext = createContext();
@@ -17,13 +17,13 @@ export const DefaultTabs = [
     {
         key: 'classification',
         title: 'Classification',
-        icon: <TagsOutlined />,
+        icon: <TagsFilled />,
         active: false
     },
     {
         key: 'location',
         title: 'Location',
-        icon: <SendOutlined />,
+        icon: <SettingFilled />,
         active: false
     }
 ];

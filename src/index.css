@@ -46,10 +46,12 @@ code {
 .ant-collapse .ant-collapse-item:first-child {
   margin-top: 0;
 }
-.ant-tree .ant-tree-node-content-wrapper {
+.ant-tree .ant-tree-title {
   text-overflow: ellipsis;
-  max-width: 140px;
+  max-width: 160px;
   overflow: hidden;
+  display: inline-block;
+  white-space: nowrap;
 }
 .m-t-10 {
   margin-top: 10px;
@@ -57,7 +59,7 @@ code {
 .m-b-10 {
   margin-bottom: 10px;
 }
-.m-b-5{
+.m-b-5 {
   margin-bottom: 5px;
 }
 .m-0 {
@@ -69,12 +71,12 @@ code {
 .helpers-area .ant-btn {
   color: #ea6241;
   font-size: 15px;
-    width: 30px !important;
-    height: 30px;
+  width: 30px !important;
+  height: 30px;
 }
 .table-striped-rows tr:nth-child(2n) td {
-    background-color: #fbfbfbc7;
+  background-color: #fbfbfbc7;
 }
 .table-striped-rows thead {
-    background-color: #f1f1f1;
+  background-color: #f1f1f1;
 }

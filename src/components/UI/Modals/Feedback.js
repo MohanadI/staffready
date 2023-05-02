@@ -46,6 +46,7 @@ function Feedback({ openModal, handleCloseModal }) {
                     name="email"
                     rules={[
                         {
+                            type: 'email',
                             required: true,
                             message: 'Please input your Email Address!',
                         },
@@ -81,7 +82,7 @@ function Feedback({ openModal, handleCloseModal }) {
 
                 <Form.Item
                     label="User Type"
-                    name="username"
+                    name="userType"
                     rules={[
                         {
                             required: true,
@@ -94,7 +95,7 @@ function Feedback({ openModal, handleCloseModal }) {
 
                 <Form.Item
                     label="Facility or Location"
-                    name="username"
+                    name="facility"
                     rules={[
                         {
                             required: true,
@@ -106,7 +107,7 @@ function Feedback({ openModal, handleCloseModal }) {
                 </Form.Item>
                 <Form.Item
                     label="License Id"
-                    name="username"
+                    name="licenseId"
                     rules={[
                         {
                             required: true,
@@ -118,7 +119,7 @@ function Feedback({ openModal, handleCloseModal }) {
                 </Form.Item>
                 <Form.Item
                     label="Ticket Type"
-                    name="username"
+                    name="ticketType"
                     rules={[
                         {
                             required: true,

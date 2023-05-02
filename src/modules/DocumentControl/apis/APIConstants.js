@@ -1,5 +1,6 @@
 export const APIS = {
     TREE:{
+        SUBJECTS_ONLY: "tree/subjects",
         SUBJECTS: "tree/subject/documents",
         CLASSIFICATIONS: "tree/classification/documents",
         LOCATIONS: "tree/location/documents"

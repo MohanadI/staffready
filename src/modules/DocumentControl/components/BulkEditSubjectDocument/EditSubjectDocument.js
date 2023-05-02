@@ -1,4 +1,4 @@
-import { Modal, message, Button, Input, Steps } from 'antd';
+import { Modal, message, Button, Steps } from 'antd';
 import { useEffect, useState } from 'react';
 import SelectDocumentsStep from './SelectDocumentsStep';
 
@@ -52,13 +52,6 @@ function EditSubjectDocument({ openModal, handleCloseModal }) {
         handleCloseModal(false);
     };
 
-    const onFinish = (values) => {
-        console.log('Success:', values);
-    };
-    const onFinishFailed = (errorInfo) => {
-        console.log('Failed:', errorInfo);
-    };
-
     const items = steps.map((item) => ({
         key: item.title,
         title: item.title,
@@ -72,7 +65,7 @@ function EditSubjectDocument({ openModal, handleCloseModal }) {
 
     return (
         <Modal
-            width={950}
+            width={1000}
             title="Bulk Edit Documents"
             style={{
                 top: 50,
@@ -91,12 +84,22 @@ function EditSubjectDocument({ openModal, handleCloseModal }) {
                 <Button
                     size='small'
                     style={{
-                        margin: '0 8px',
+                        margin: '0px 4px',
                     }}
                     danger
                     onClick={() => handleCancel()}
                 >
                     Cancel
+                </Button>
+                <Button
+                    disabled={current === 0}
+                    size='small'
+                    style={{
+                        margin: '0px 4px',
+                    }}
+                    onClick={() => prev()}
+                >
+                    Previous
                 </Button>
                 {current < steps.length - 1 && (
                     <Button size='small' type="primary" onClick={() => next()}>
@@ -108,16 +111,6 @@ function EditSubjectDocument({ openModal, handleCloseModal }) {
                         Finish
                     </Button>
                 )}
-                <Button
-                    disabled={current === 0}
-                    size='small'
-                    style={{
-                        margin: '0 8px',
-                    }}
-                    onClick={() => prev()}
-                >
-                    Previous
-                </Button>
             </div>
         </Modal>
     )

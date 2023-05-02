@@ -1,4 +1,5 @@
-import { InputNumber, Input, Form } from "antd";
+import { Input, Form } from "antd";
+import TreeSelect from "../components/UI/TreeSelect";
 
 export const EditableCell = ({
     editing,
@@ -8,9 +9,11 @@ export const EditableCell = ({
     record,
     index,
     children,
+    api,
     ...restProps
 }) => {
-    const inputNode = inputType === 'number' ? <InputNumber /> : <Input />;
+    const inputNode = inputType === 'treeSelect' ? <TreeSelect api={api} record={record}/> : <Input />;
+
     return (
         <td {...restProps}>
             {editing ? (

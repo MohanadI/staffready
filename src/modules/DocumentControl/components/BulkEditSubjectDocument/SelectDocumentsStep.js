@@ -1,7 +1,23 @@
-import { Typography, Table } from 'antd';
-import { useEffect, useState } from 'react';
+import { Typography, Table, Button } from 'antd';
+import { useEffect, useState, useContext } from 'react';
+import { DocumentControlContext } from '../../configs';
+import { get_subject_document_data } from '../../apis/DocumentControlCalls';
 
 function SelectDocumentsStep() {
+    const { documentControlData } = useContext(DocumentControlContext);
+    const [isLoading, setIsLoading] = useState(false);
+    const [dataSource, setDataSource] = useState([]);
+
+    useEffect(() => {
+        setIsLoading(true);
+        loadSubjectDocumentData();
+    }, []);
+
+    const loadSubjectDocumentData = async () => {
+        const result = await get_subject_document_data(documentControlData?.value);
+        setDataSource(result);
+        setIsLoading(false);
+    }
     const columns = [
         {
             title: 'Document Name',
@@ -21,22 +37,28 @@ function SelectDocumentsStep() {
             title: 'Subject',
             key: 'subject',
             responsive: ['lg'],
-            // render: (text) => {
-            //     return text.subject?.id
-            // },
+            render: (record, text) => {
+                return text?.subject?.id
+            },
             sorter: (a, b) => a.subject?.id.length - b.subject?.id.length,
         },
         {
             title: 'Locations',
-            dataIndex: 'locations',
-            key: 'locations',
-            sorter: (a, b) => a.name.length - b.name.length
+            dataIndex: 'locationCount',
+            key: 'locationCount',
+            sorter: (a, b) => a.name.length - b.name.length,
+            render: (record, text) => {
+                return <Button type='link'>{text?.locationCount + " Locations"}</Button>
+            }
         },
         {
             title: 'Type',
             dataIndex: 'type',
             key: 'type',
             responsive: ['lg'],
+            render: (record, text) => {
+                return text?.isImproveId
+            },
             sorter: (a, b) => a.name.length - b.name.length
         }
     ];
@@ -47,21 +69,12 @@ function SelectDocumentsStep() {
         }
     };
 
-    const dataSource = [
-        {
-            name: "suhayb test 2",
-            id: "Core.CL.test2.001",
-            subject: "GH_Clinics",
-            locations: "0 locations",
-            type: "File or URL"
-        }
-    ]
-
     return(
         <>
             <Typography.Title level={4}>Select Documents</Typography.Title>
             <Typography.Paragraph>Select at least 1 document to edit. (Documents that are currently undergoing revision cannot be modified.)</Typography.Paragraph>
             <Table
+                loading={isLoading}
                 rowSelection={rowSelection}
                 className="table-striped-rows"
                 rowKey={"id"}

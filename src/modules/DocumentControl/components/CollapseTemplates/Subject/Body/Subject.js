@@ -1,11 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react';
 
-import { Form, Button, Space, Row, Col, Popover, Skeleton, Popconfirm, Table, Typography, Tooltip } from 'antd';
+import { Form, Button, Space, Row, Col, Popover, Skeleton, Popconfirm, Table, Typography, Tooltip, Card } from 'antd';
 import { MessageOutlined, QuestionCircleOutlined, CheckCircleOutlined, CloudDownloadOutlined } from '@ant-design/icons';
 import { DocumentControlContext } from '../../../../configs';
 import { get_subject_data } from '../../../../apis/DocumentControlCalls';
 import { EditableCell } from '../../../../../../hooks/editCell';
 import Feedback from '../../../../../../components/UI/Modals/Feedback';
+import { APIS } from '../../../../apis/APIConstants';
 
 const helpContent = (
     <div>
@@ -18,14 +19,7 @@ export default function SubjectBody() {
     const [isLoading, setIsLoading] = useState(false);
     const [loadedBefore, setLoadedBefore] = useState(false);
     const [openFeedback, setOpenFeedback] = useState(false);
-    const [dataSource, setDataSource] = useState([
-        {
-            key: '0',
-            id: 'Edward King 0',
-            parentPk: 0,
-            parent: {}
-        }
-    ]);
+    const [dataSource, setDataSource] = useState([]);
     const [editingKey, setEditingKey] = useState('');
     const isEditing = (record) => record.key === editingKey;
 
@@ -78,23 +72,18 @@ export default function SubjectBody() {
         {
             title: 'Subject ID',
             dataIndex: 'id',
+            inputType: "text",
             width: '30%',
             editable: true,
         },
         {
             title: 'Within',
             dataIndex: 'parentPk',
-            editable: false,
-            render: (_, record) => {
-                if (record.parentPk === 0) {
-                    return <Button
-                        size='small'
-                        type='link'
-                    >
-                        [top level]
-                    </Button>
-                }
-                return "parent1"
+            inputType: "treeSelect",
+            editable: true,
+            api: APIS.TREE.SUBJECTS_ONLY,
+            render: (record) => {
+                return record?.parent?.name || '[top level]'
             }
         },
         {
@@ -121,14 +110,24 @@ export default function SubjectBody() {
                             size='small'
                             disabled={editingKey !== ''}
                             onClick={() => edit(record)}
-                            type='text'
                         >
                             Edit
                         </Button>
                         <Popconfirm title="Sure to delete?" onConfirm={() => handleDelete(record.key)}>
-                            <Button size='small' type='text' danger>Delete</Button>
+                            <Button size='small' danger>Delete</Button>
                         </Popconfirm>
-
+                        <Tooltip title="Download All Published Files as ZIP">
+                            <Button
+                                size="small"
+                                type='primary'
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    window.location.href = 'https://cobalt301.openstack.local/StaffReady/v10/api/subject/zip';
+                                }}
+                                icon={<CloudDownloadOutlined />}>
+                                Download
+                            </Button>
+                        </Tooltip>
                     </Space>
 
                 );
@@ -155,9 +154,10 @@ export default function SubjectBody() {
             ...col,
             onCell: (record) => ({
                 record,
-                inputType: 'text',
+                inputType: col.inputType,
                 dataIndex: col.dataIndex,
                 title: col.title,
+                api: col.api ? col.api : null,
                 editing: isEditing(record),
             }),
         };
@@ -190,12 +190,6 @@ export default function SubjectBody() {
                 </Col>
             </Row>
             <Skeleton loading={isLoading}>
-                <Button
-                    className='m-b-5'
-                    size="small"
-                    icon={<CloudDownloadOutlined />}>
-                    Download All Published Files as ZIP
-                </Button>
                 <Form form={form} component={false}>
                     <Table
                         components={{
@@ -203,7 +197,6 @@ export default function SubjectBody() {
                                 cell: EditableCell,
                             },
                         }}
-                        bordered
                         dataSource={dataSource}
                         columns={mergedColumns}
                         rowClassName="editable-row"

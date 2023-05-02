@@ -31,6 +31,17 @@ export const get_subject_data = async (ID) => {
     return res?.data;
 }
 
+export const get_subjects_tree = async () => {
+    let res = null;
+
+    await axios
+        .get(MAIN_URL + APIS.TREE.SUBJECTS_ONLY)
+        .then(data => res = data)
+        .catch(error => console.log(error));
+
+    return res?.data;
+}
+
 export const get_subject_document_data = async (ID) => {
     let res = null;
 

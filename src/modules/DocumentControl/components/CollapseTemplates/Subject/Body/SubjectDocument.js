@@ -105,7 +105,7 @@ export default function SubjectDocumentBody() {
                     columns={columns}
                     dataSource={dataSource}
                     pagination={{
-                        position: ["top"]
+                        position: ["bottomRight"]
                     }}
                 />
             </Skeleton>

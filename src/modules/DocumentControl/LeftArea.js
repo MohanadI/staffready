@@ -10,6 +10,8 @@ function LeftArea() {
     const [isLoading, setIsLoading] = useState(false);
     const [treeData, setTreeData] = useState([]);
     const [documentControlTabs, setDocumentControlTabs] = useState(DefaultTabs);
+    const [activeTab, setActiveTab] = useState('subject')
+
 
 
 
@@ -32,7 +34,9 @@ function LeftArea() {
             return item.key === tabKey;
         });
         updated[currentIndex].active = true;
-        const activeTab = documentControlTabs.filter(v => v.active === true)[0].key;
+        const activeTabObj = documentControlTabs.filter(v => v.active === true);
+
+        const activeTab = activeTabObj[0].key;
 
         setDocumentControlTabs(updated);
 
@@ -50,9 +54,9 @@ function LeftArea() {
 
 
         setTreeData(TreeResult);
-        // setSearchedTreeData(TreeResult)
         setIsLoading(false);
         handleLoadingChange(false);
+        setActiveTab(updated[currentIndex])
     }
 
 
@@ -99,6 +103,7 @@ function LeftArea() {
                     onSelect={onSelect}
                     treeData={treeData}
                     isLoading={isLoading}
+                    currentTab={activeTab}
                 />
             </Space>
         </>

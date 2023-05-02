@@ -2,7 +2,7 @@ import { createContext } from 'react';
 import {
     FolderFilled,
     TagsFilled,
-    SettingFilled
+    FlagFilled
 } from '@ant-design/icons';
 
 export const DocumentControlContext = createContext();
@@ -23,7 +23,7 @@ export const DefaultTabs = [
     {
         key: 'location',
         title: 'Location',
-        icon: <SettingFilled />,
+        icon: <FlagFilled />,
         active: false
     }
 ];

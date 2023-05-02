@@ -43,11 +43,11 @@ function Feedback({ openModal, handleCloseModal }) {
             >
                 <Form.Item
                     label="Email Address"
-                    name="username"
+                    name="email"
                     rules={[
                         {
                             required: true,
-                            message: 'Please input your username!',
+                            message: 'Please input your Email Address!',
                         },
                     ]}
                 >
@@ -56,11 +56,11 @@ function Feedback({ openModal, handleCloseModal }) {
 
                 <Form.Item
                     label="Subject"
-                    name="username"
+                    name="subject"
                     rules={[
                         {
                             required: true,
-                            message: 'Please input your username!',
+                            message: 'Please input your Subject!',
                         },
                     ]}
                 >
@@ -68,11 +68,11 @@ function Feedback({ openModal, handleCloseModal }) {
                 </Form.Item>
 
                 <Form.Item
-                    name="username"
+                    name="body"
                     rules={[
                         {
                             required: true,
-                            message: 'Please input your username!',
+                            message: 'Please input your Body!',
                         },
                     ]}
                 >
@@ -85,7 +85,7 @@ function Feedback({ openModal, handleCloseModal }) {
                     rules={[
                         {
                             required: true,
-                            message: 'Please input your username!',
+                            message: 'Please input your User Type!',
                         },
                     ]}
                 >
@@ -98,7 +98,7 @@ function Feedback({ openModal, handleCloseModal }) {
                     rules={[
                         {
                             required: true,
-                            message: 'Please input your username!',
+                            message: 'Please input your Facility or Location!',
                         },
                     ]}
                 >
@@ -110,7 +110,7 @@ function Feedback({ openModal, handleCloseModal }) {
                     rules={[
                         {
                             required: true,
-                            message: 'Please input your username!',
+                            message: 'Please input your License Id!',
                         },
                     ]}
                 >
@@ -122,7 +122,7 @@ function Feedback({ openModal, handleCloseModal }) {
                     rules={[
                         {
                             required: true,
-                            message: 'Please input your username!',
+                            message: 'Please input your Ticket Type!',
                         },
                     ]}
                 >

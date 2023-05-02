@@ -10,6 +10,9 @@ export const APIS = {
             GET_SUBJECT: (ID) => "subject/" + ID,
             GET_SUBJECT_DOCUMENT: (ID) => "subject/" + ID +"/documents"
         },
+        DOCUMENT_CONTROL:{
+            LOAD_LOCATIONS: (ID) => "documentcontrol/location/document/" + ID +"/locations"
+        },
         STATUS: {
             SUBJECT: (ID) => "documentcontrol/colorbar/subject/" + ID,
             SUBJECT_DOCUMENT: (ID) => "documentcontrol/colorbar/subjectDocuments/" + ID

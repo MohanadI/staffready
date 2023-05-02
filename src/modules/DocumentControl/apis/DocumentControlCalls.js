@@ -63,3 +63,14 @@ export const get_color_bar_status = async (url) => {
 
     return res?.data?.color || "OK";
 }
+
+export const load_document_locations = async (ID) => {
+    let res = null;
+
+    await axios
+        .get(MAIN_URL + APIS.COLOR_BAR.DOCUMENT_CONTROL.LOAD_LOCATIONS(ID))
+        .then(data => res = data)
+        .catch(error => console.log(error));
+
+    return res?.data;
+}

@@ -50,14 +50,13 @@ export default function SubjectDocumentBody() {
         {
             title: 'Description',
             dataIndex: 'description',
+            responsive: ['lg'],
             key: 'description',
             sorter: (a, b) => a.id.length - b.id.length,
         }
     ];
 
     useEffect(() => {
-        console.log(activeTabs);
-        // if activeTabs.indexOf('subject') === -1 && loadedBefore === true we can reset loadedBefore
         if (activeTabs.indexOf('subject_documents') >= 0 && !loadedBefore) {
             setIsLoading(true);
             setLoadedBefore(true);

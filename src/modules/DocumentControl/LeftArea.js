@@ -11,8 +11,6 @@ function LeftArea() {
     const [treeData, setTreeData] = useState([]);
     const [documentControlTabs, setDocumentControlTabs] = useState(DefaultTabs);
 
-
-
     const [messageApi, contextHolder] = message.useMessage();
 
     useEffect(() => {
@@ -48,14 +46,10 @@ function LeftArea() {
             handleDCDataChange(TreeResult[0]);
         }
 
-
         setTreeData(TreeResult);
-        // setSearchedTreeData(TreeResult)
         setIsLoading(false);
         handleLoadingChange(false);
     }
-
-
 
     const activeIcon = documentControlTabs.filter(v => v.active === true)[0].icon;
     const defaultSelectedKey = treeData.length > 0 ? treeData[0].value : "";
@@ -63,7 +57,7 @@ function LeftArea() {
     return (
         <>
             {contextHolder}
-            <Space direction="vertical" style={{ maxWidth: "100%", widh: '100%' }}>
+            <Space direction="vertical" style={{ width: '100%' }}>
                 <Space.Compact style={{ width: '100%' }}>
                     <div style={{ width: '100%', display: 'flex' }}>
                         {documentControlTabs.map(tab =>
@@ -79,11 +73,8 @@ function LeftArea() {
                                 {tab.active ? tab.title : ""}
                             </Button>
                         )}
-
                     </div>
-
                 </Space.Compact>
-
                 <Button
                     block
                     type="primary"
@@ -91,8 +82,6 @@ function LeftArea() {
                 >
                     Add
                 </Button>
-
-
                 <CustomTree
                     activeIcon={activeIcon}
                     defaultSelectedKeys={[defaultSelectedKey]}

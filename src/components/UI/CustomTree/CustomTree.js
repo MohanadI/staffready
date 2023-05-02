@@ -1,17 +1,25 @@
 import "./_customTree.scss"
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useContext } from 'react';
 import { Tree, Skeleton, Space, Input, Button } from "antd";
 import PerfectScrollbar from 'react-perfect-scrollbar'
 import useWindowSize from "../../../hooks/useWindowSize";
+import { FileTextOutlined } from '@ant-design/icons'
 import { cloneDeep } from "lodash";
+import { DocumentControlContext } from "../../../modules/DocumentControl/configs";
 
-const CustomTree = ({ activeIcon, defaultSelectedKey, onSelect, treeData, isLoading }) => {
+const CustomTree = ({ currentTab, defaultSelectedKey, onSelect, treeData, isLoading }) => {
+
+
 
     const [expandedKeys, setExpandedKeys] = useState([]);
     const [autoExpandParent, setAutoExpandParent] = useState(true);
     const [searchTreeData, setSearchedTreeData] = useState([]);
-    const [searchText, setSearchText] = useState('');
+    const [searchText, setSearchText] = useState(null);
     const { height } = useWindowSize();
+
+    // const { activeTabs } = useContext(DocumentControlContext);
+
+
 
     useEffect(() => {
         setSearchedTreeData(treeData)
@@ -19,6 +27,7 @@ const CustomTree = ({ activeIcon, defaultSelectedKey, onSelect, treeData, isLoad
 
     useEffect(() => {
         const _expandedKeys = [];
+        console.log('currentTap', currentTab)
         const traverse = (data) => {
             return data.map(node => {
                 const targetIdx = node?.text?.toUpperCase()?.indexOf(searchText?.toUpperCase());
@@ -40,6 +49,14 @@ const CustomTree = ({ activeIcon, defaultSelectedKey, onSelect, treeData, isLoad
                 } else {
                     newNode.text = <span>{node?.text}</span>
                 }
+
+                if (newNode.type === 'document' && currentTab.title === 'Subject') {
+                    newNode.icon = <FileTextOutlined />
+                } else {
+                    newNode.icon = currentTab.icon;
+                }
+
+
                 if (node?.children) {
                     return { ...newNode, children: traverse(node.children) }
                 }
@@ -51,7 +68,7 @@ const CustomTree = ({ activeIcon, defaultSelectedKey, onSelect, treeData, isLoad
         setExpandedKeys(_expandedKeys);
         setSearchedTreeData(traversedTree);
         setAutoExpandParent(true);
-    }, [searchText]);
+    }, [searchText, treeData]);
 
     const onSearch = (e) => {
         let { value: searchText } = e.target;
@@ -78,7 +95,7 @@ const CustomTree = ({ activeIcon, defaultSelectedKey, onSelect, treeData, isLoad
                         fieldNames={{ title: "text", key: "value", children: "children" }}
                         showLine={true}
                         showIcon={true}
-                        icon={activeIcon}
+                        // icon={activeIcon}
                         defaultSelectedKeys={[defaultSelectedKey]}
                         onSelect={onSelect}
                         treeData={searchTreeData}
